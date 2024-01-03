@@ -1,5 +1,11 @@
 console.log("rockPaperScissorLogic.js loaded");
 
+// + ATTRIBUTES +
+let playerScore = 0;
+let computerScore = 0;
+let round = 1;
+
+// + FUNCTIONS +
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
     switch (randomNumber) {
@@ -15,6 +21,8 @@ function getComputerChoice() {
 function play(computerChoiceResult, selectedOption) {
     const playerChoiceResult = document.getElementById("playerChoiceResult");
     const computerChoiceValue = getComputerChoice();
+    const roundResult = document.getElementById("roundCount");
+
     if (selectedOption) {
         playerChoiceResult.textContent = "Your choice: " + selectedOption.value;
     } else {
@@ -24,6 +32,7 @@ function play(computerChoiceResult, selectedOption) {
     computerChoiceResult.textContent = "Computer choice: " + computerChoiceValue;
 
     determineWinner(computerChoiceValue, selectedOption.value);
+    roundResult.textContent = "Round: " + round;
 }
 
 function determineWinner(computerChoice, playerChoice) {
@@ -35,7 +44,24 @@ function determineWinner(computerChoice, playerChoice) {
     || (computerChoice === "paper" && playerChoice === "rock")
     || (computerChoice === "scissors" && playerChoice === "paper")) {
         winner.textContent = "Computer wins!";
+        updateScore("computer");
     } else {
         winner.textContent = "You win!";
+        updateScore("player");
     }
+
+}
+
+function updateScore(winner) {
+    switch (winner) {
+        case "computer":
+            computerScore++;
+            break;
+        case "player":
+            playerScore++;
+            break;
+        default:
+            break;
+    }
+    round++; 
 }
