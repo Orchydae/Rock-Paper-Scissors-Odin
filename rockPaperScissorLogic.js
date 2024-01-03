@@ -49,7 +49,6 @@ function determineWinner(computerChoice, playerChoice) {
         winner.textContent = "You win!";
         updateScore("player");
     }
-
 }
 
 function updateScore(winner) {
